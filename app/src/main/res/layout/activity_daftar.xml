@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:padding="40dp"
+   >
+
+        <!--todo 1.1-->
+
+    <EditText
+        android:id="@+id/daftarusername"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:background="@drawable/backgroundedittext"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
+        android:hint="Name" />
+
+    <EditText
+        android:id="@+id/daftaremail"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:textColorHint="@android:color/black"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/black"
+
+        android:fontFamily="sans-serif-condensed"
+        android:background="@drawable/backgroundedittext"
+        android:gravity="center"
+        android:hint="Email"/>
+
+    <EditText
+        android:id="@+id/daftarhp"
+        android:textColorHint="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:background="@drawable/backgroundedittext"
+        android:gravity="center"
+        android:inputType="number"
+        android:hint="Handphone"/>
+
+    <EditText
+        android:id="@+id/daftarpassword"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:inputType="textPassword"
+        android:layout_marginTop="5dp"
+        android:textColorHint="@android:color/black"
+        android:fontFamily="sans-serif-condensed"
+        android:background="@drawable/backgroundedittext"
+        android:gravity="center"
+        android:hint="Password"/>
+
+    <EditText
+        android:id="@+id/daftarconfirmasipass"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="5dp"
+        android:textColorHint="@android:color/black"
+        android:background="@drawable/backgroundedittext"
+        android:gravity="center"
+        android:fontFamily="sans-serif-condensed"
+        android:hint="Confirm Password"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text="Sign Up"
+        android:id="@+id/btnsignup"
+        android:textAllCaps="false"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/black"
+        android:background="@drawable/groundbutton"/>
+</LinearLayout>
