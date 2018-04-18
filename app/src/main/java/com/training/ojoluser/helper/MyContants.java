@@ -5,6 +5,6 @@ package com.training.ojoluser.helper;
  */
 
 public class MyContants {
-    public static final String BASE_URL = "http://udakita.com/ojeg_server/api/";
+    public static final String BASE_URL = "http://latihan.bengkuluprov.go.id/ojeg_server/api/";
     public static final String BASE_MAP_URL = "https://maps.googleapis.com/maps/api/directions/";
 }
