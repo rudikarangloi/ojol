@@ -41,6 +41,8 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".activity.PosisiDriver"></activity>
+        <activity android:name=".activity.FindDriverActivity"></activity>
     </application>
 
 </manifest>

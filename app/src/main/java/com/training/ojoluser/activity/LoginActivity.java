@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             String email = loginemail.getText().toString();
             String device = HeroHelper.getDeviceUUID(LoginActivity.this);
             //tampilan loading
-            ProgressDialog dialog = ProgressDialog.show(this, "proses register", "loading...");
+            final ProgressDialog dialog = ProgressDialog.show(this, "proses register", "loading...");
 
             ApiService service = InitRetrofit.getInstance();
             Call<ModelLogin> loginCall = service.loginuser(device, email, password);
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                         String token = response.body().getToken();
                         sesi = new SessionManager(LoginActivity.this);
                         if (result.equals("true")) {
-                            HeroHelper.pindahclass(LoginActivity.this, MainActivity.class);
+                            HeroHelper.pindahclass(LoginActivity.this, MapsActivity.class);
                             HeroHelper.pesan(LoginActivity.this, msg);
                             DataLogin login = response.body().getData();
                             sesi.setIduser(login.getIdUser());
@@ -87,9 +87,10 @@ public class LoginActivity extends AppCompatActivity {
                             sesi.setPhone(login.getUserHp());
                             sesi.createLoginSession(token);
                             finish();
+                            dialog.dismiss();
                         } else {
                             HeroHelper.pesan(LoginActivity.this, msg);
-
+                    dialog.dismiss();
                         }
 
                     }

@@ -227,9 +227,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //ubah koordinat jadi nama lokasi
             name_location = posisiku(latawal, lonawal);
 
-            lokasiawal.setText(name_location);
+
 
         }
+        lokasiawal.setText(name_location);
 
         // Add a marker in Sydney and move the camera
 
@@ -302,10 +303,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String alamat = "asdas";
         String tarif = txtharga.getText().toString();
         String device = HeroHelper.getDeviceUUID(this);
+        String jrk =jarak.replace(" km", "");
+        Toast.makeText(MapsActivity.this, "klik", Toast.LENGTH_SHORT).show();
 
         ApiService service =InitRetrofit.getInstance();
         Call<ModelBooking> bookingCall =service.bookingdriver(
-                iduser,ltawal,lngawal,awal,ltakhir,lngakhir,tujuan,alamat,jarak,token,device
+                iduser,
+                ltawal,
+                lngawal,
+                awal,
+                ltakhir,
+                lngakhir,
+                tujuan,
+                alamat,
+                jrk,
+                token,
+                device
         );
         bookingCall.enqueue(new Callback<ModelBooking>() {
             @Override
@@ -328,7 +341,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onFailure(Call<ModelBooking> call, Throwable t) {
-
+            HeroHelper.pesan(MapsActivity.this,t.getMessage());
             }
         });
     }

@@ -1,6 +1,8 @@
 package com.training.ojoluser.network;
 
 import com.training.ojoluser.model.ModelBooking;
+import com.training.ojoluser.model.ModelCancel;
+import com.training.ojoluser.model.ModelCekBooking;
 import com.training.ojoluser.model.ModelLogin;
 import com.training.ojoluser.model.ModelRegister;
 import com.training.ojoluser.model.ModelWaypoint;
@@ -59,5 +61,22 @@ public interface ApiService {
             @Field("f_token") String token,
             @Field("f_device") String device);
 
+    @FormUrlEncoded
+    //nama function
+    @POST("checkBooking")
+        //get response dari webservice
+    Call<ModelCekBooking> cekstatusbooking(
+            @Field("idbooking") String idbooking
+           );
+
+    @FormUrlEncoded
+    //nama function
+    @POST("cancel_booking")
+        //get response dari webservice
+    Call<ModelCancel> cancelbooking(
+            @Field("id") String idbooking,
+            @Field("f_token") String token,
+            @Field("f_device") String device
+           );
 
 }
