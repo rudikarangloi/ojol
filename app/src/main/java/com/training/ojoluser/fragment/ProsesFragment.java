@@ -108,6 +108,7 @@ public class ProsesFragment extends Fragment{
                         adapter.setOnClick((CustomRecycler.OnItemClicked) getContext());
 
 
+                        
                     }
                     else{
                         //bkin toast kalau seandai hasil resultnya nggak true
