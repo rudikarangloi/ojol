@@ -46,8 +46,8 @@ public class FindDriverActivity extends AppCompatActivity {
         pulsator.start();
         id =getIntent().getIntExtra("idbooking",0);
         checkbooking();
-
     }
+
 
     private void checkbooking() {
         String idbooking = String.valueOf(id);

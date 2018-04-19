@@ -3,7 +3,9 @@ package com.training.ojoluser.network;
 import com.training.ojoluser.model.ModelBooking;
 import com.training.ojoluser.model.ModelCancel;
 import com.training.ojoluser.model.ModelCekBooking;
+import com.training.ojoluser.model.ModelDriver;
 import com.training.ojoluser.model.ModelLogin;
+import com.training.ojoluser.model.ModelHistory;
 import com.training.ojoluser.model.ModelRegister;
 import com.training.ojoluser.model.ModelWaypoint;
 
@@ -77,6 +79,25 @@ public interface ApiService {
             @Field("id") String idbooking,
             @Field("f_token") String token,
             @Field("f_device") String device
+           );
+
+    @FormUrlEncoded
+    //nama function
+    @POST("get_booking")
+        //get response dari webservice
+    Call<ModelHistory> historyproses(
+            @Field("status") String status,
+            @Field("f_idUser") String iduser,
+            @Field("f_token") String token,
+            @Field("f_device") String device
+           );
+
+    @FormUrlEncoded
+    //nama function
+    @POST("get_driver")
+        //get response dari webservice
+    Call<ModelDriver> getdataDriver(
+            @Field("f_iddriver") String iddriver
            );
 
 }

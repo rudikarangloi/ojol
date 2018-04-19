@@ -2,6 +2,7 @@ package com.training.ojoluser.activity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -11,8 +12,11 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -65,7 +69,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final int REQUEST_LOCATION = 1;
     private static final int REQAWAL = 2;
@@ -202,7 +206,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        gps= new GPSTracker(MapsActivity.this);
+        gps = new GPSTracker(MapsActivity.this);
         //todo 3 cek permission GPS
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
@@ -226,7 +230,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             lonawal = gps.getLongitude();
             //ubah koordinat jadi nama lokasi
             name_location = posisiku(latawal, lonawal);
-
 
 
         }
@@ -261,12 +264,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         name_location = null;
         Geocoder geocoder = new Geocoder(MapsActivity.this, Locale.getDefault());
         try {
-            List<Address> list = geocoder.getFromLocation(latawal,lonawal, 1);
-            if(list != null&&list.size()>0) {
+            List<Address> list = geocoder.getFromLocation(latawal, lonawal, 1);
+            if (list != null && list.size() > 0) {
                 name_location = list.get(0).getAddressLine(0) + "" + list.get(0).getCountryName();
 
                 //fetch data from addresses
-            }else{
+            } else {
                 Toast.makeText(this, "kosong", Toast.LENGTH_SHORT).show();
                 //display Toast message
             }
@@ -303,11 +306,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String alamat = "asdas";
         String tarif = txtharga.getText().toString();
         String device = HeroHelper.getDeviceUUID(this);
-        String jrk =jarak.replace(" km", "");
+        String jrk = jarak.replace(" km", "");
         Toast.makeText(MapsActivity.this, "klik", Toast.LENGTH_SHORT).show();
 
-        ApiService service =InitRetrofit.getInstance();
-        Call<ModelBooking> bookingCall =service.bookingdriver(
+        ApiService service = InitRetrofit.getInstance();
+        Call<ModelBooking> bookingCall = service.bookingdriver(
                 iduser,
                 ltawal,
                 lngawal,
@@ -323,7 +326,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         bookingCall.enqueue(new Callback<ModelBooking>() {
             @Override
             public void onResponse(Call<ModelBooking> call, Response<ModelBooking> response) {
-                int idbooking =response.body().getIdBooking();
+                int idbooking = response.body().getIdBooking();
                 Toast.makeText(MapsActivity.this, "idboo" + idbooking, Toast.LENGTH_SHORT).show();
                 String result = response.body().getResult();
                 String pesan = response.body().getMsg();
@@ -341,7 +344,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onFailure(Call<ModelBooking> call, Throwable t) {
-            HeroHelper.pesan(MapsActivity.this,t.getMessage());
+                HeroHelper.pesan(MapsActivity.this, t.getMessage());
             }
         });
     }
@@ -366,11 +369,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         startActivityForResult(intent, i);
     }
-//untuk menangkap resnpose atau result
+
+    //untuk menangkap resnpose atau result
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQAWAL) {
-            if (resultCode == RESULT_OK&& data!=null) {
+            if (resultCode == RESULT_OK && data != null) {
                 Place place = PlaceAutocomplete.getPlace(this, data);
                 latawal = place.getLatLng().latitude;
                 lonawal = place.getLatLng().longitude;
@@ -461,7 +465,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         ApiService service = InitRetrofit.getInstance2();
-        Call<ModelWaypoint> modelWaypointCall =service.getwaypoint(origin,desti);
+        Call<ModelWaypoint> modelWaypointCall = service.getwaypoint(origin, desti);
         modelWaypointCall.enqueue(new Callback<ModelWaypoint>() {
             @Override
             public void onResponse(Call<ModelWaypoint> call, Response<ModelWaypoint> response) {
@@ -492,5 +496,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id==R.id.history){
+            HeroHelper.pindahclass(MapsActivity.this,History.class);
+        }else{
+            //untuk tombol profile nanti bakal muncul informasi dari user yang login
+            //yang bakal muncul nanti nama user,email dan hp nya
+            //
+
+            final SessionManager sesi = new SessionManager(MapsActivity.this);
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(MapsActivity.this);
+            alert.setTitle("Profil User");
+            alert.setMessage("Nama :" + sesi.getNama() + "\n" +
+                    "Email :" + sesi.getEmail() + "\n" +
+                    "Handphone :" + sesi.getPhone()
+            );
+            alert.setPositiveButton("Sign Out", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //event saat button sign out di klik
+                    sesi.logout();
+                    Intent intent = new Intent(MapsActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+            });
+            //untuk manampilkan dialog
+            alert.show();
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
