@@ -19,6 +19,12 @@
 
     Once you have your key (it starts with "AIza"), replace the "google_maps_key"
     string in this file.
+
+    My Ojek Online 14 Mei 2018:Rudi.karangloi
+    AIzaSyC4_OWsvMNaoExK-VHE-HgqM5SL5l57XW4
+    IMA Studio
+
     -->
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDeSo9nGCkgn5vo--Kp43bBaB19FPq1f2o</string>
+
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyC4_OWsvMNaoExK-VHE-HgqM5SL5l57XW4</string>
 </resources>

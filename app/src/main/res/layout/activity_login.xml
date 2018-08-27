@@ -42,7 +42,6 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/groundbutton"
         android:text="Sign in"
-        android:onClick="@{klik::onKlikLogin}"
         android:id="@+id/signin"
         android:textAllCaps="false"
         android:textColor="@android:color/white"/>

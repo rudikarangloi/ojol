@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.training.ojoluser"
+        applicationId "com.training.ojolusertraining"
         minSdkVersion 18
         targetSdkVersion 27
         versionCode 1
@@ -20,19 +20,25 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile 'com.jakewharton:butterknife:8.8.1'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'pl.bclogic:pulsator4droid:1.0.3'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'pl.bclogic:pulsator4droid:1.0.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'com.google.android.gms:play-services-maps:11.0.4'
-    compile 'com.google.android.gms:play-services-places:11.0.4'
-    compile 'com.google.android.gms:play-services:11.8.0'
+    implementation 'com.google.android.gms:play-services-maps:11.0.4'
+    implementation 'com.google.android.gms:play-services-places:11.0.4'
+    implementation 'com.google.android.gms:play-services:11.8.0'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'pub.devrel:easypermissions:1.2.0'
+    implementation 'com.google.android.gms:play-services-location:11.8.0'
+    implementation 'com.google.maps.android:android-maps-utils:0.4+'
+
+
 }
